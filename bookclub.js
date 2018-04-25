@@ -39,33 +39,84 @@ function newRequest() {
 
 
 function handleResponse(bookListObj) {
+
+	function createEle(type, id, text) {
+		var ele = document.createElement(type);
+
+		if (id != "") {
+			ele.id = id;
+		}
+
+		if (text != "") {
+			var eleText = document.createTextNode(text);
+			ele.appendChild(eleText);
+		}
+
+		return ele;
+	}
+
+	function generatePopup(index) {
+
+	}
+
+	if (bookListObj.totalItems == 0) {
+		// display the nothing found stuff instead
+		return;
+	}
+
 	var bookList = bookListObj.items;
 	var displayedIndex = 0;
 
 	// where to put the data on the Web page
-	var popup = document.getElementById("popup");
+	var popup = document.createElement("div");
+	popup.id = "popup";
 
-	// Populate the popup content and buttons
-	if (bookList.length == 0) {
-		// display the no results stuff and return
+	var closeButton = createEle("button", "popupClose", "ⓧ");
+	popup.appendChild(closeButton);
+
+	var middleDiv = document.createElement("div");
+
+	var leftButton = createEle("button", "popupLeft", "&larr;");
+	middleDiv.appendChild(leftButton);
+	if (displayedIndex == 0) {
+		leftButton.style.visibility = "hidden";
 	}
 
-	if (displayedIndex > 0) {
-		// display the left button
-	}
+	var volInfo = bookList[displayedIndex].volumeInfo;
 
-	if (displayIndex < bookList.length - 1) {
-		// display the right button
-	}
-	popup.innerHTML = "<button id='goLeft'>left</button><button id='goRight'>right</button>";
-	var left = document.getElementById("goLeft");
-	var right = document.getElementById("goRight");
+	var sec = document.createElement("section");
+	var img = document.createElement("img");
+	img.src = volInfo.imageLinks.thumbnail;
+	img.alt = volInfo.title;
 
-	left.onclick = function() {
-		if (displayedIndex > 0) {
-
+	var innerDiv = document.createElement("div");
+	var h2 = createEle("h2", "", volInfo.title);
+	innerDiv.appendChild(h2);
+	var authString = "";
+	for (var i = 0; i < volInfo.authors.length; i++) {
+		authString += volInfo.authors[i];
+		if (i+1 < volInfo.authors.length) {
+			authString += ", ";
 		}
 	}
+	var h3 = createEle("h3", "", authString);
+	innerDiv.appendChild(h3);
+	var p = createEle("p", "", "dfgjoisdjgf");
+	innerDiv.appendChild(p);
+
+	sec.appendChild(img);
+	sec.appendChild(innerDiv);
+
+	middleDiv.appendChild(sec);
+
+	var rightButton = createEle("button", "popupRight", "&rarr;");
+	middleDiv.appendChild(rightButton);
+
+	popup.appendChild(middleDiv);
+
+	var keep = createEle("button", "keep", "Keep");
+	popup.appendChild(keep);
+
 	/* write each title as a new paragraph */
 	//for (i = 0; i < bookList.length; i++) {
 	//	var book = bookList[i];
@@ -75,7 +126,6 @@ function handleResponse(bookListObj) {
 	//	titlePgh.textContent = title;
 	//	bookDisplay.append(titlePgh);
 	//}
-}
 
-var pop = document.getElementById("popup");
-pop.remove();
+	document.getElementById("tiles").appendChild(popup);
+}
