@@ -131,6 +131,7 @@ p {
 
 #popup div section img, #tiles section img {
 	align-self: center;	
+	width: 150px;
 }
 
 #popup div section div, #tiles section div {
