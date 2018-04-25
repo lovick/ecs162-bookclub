@@ -1,5 +1,3 @@
-var responseList = null;
-
 function newRequest() {
 
 	var title = document.getElementById("title").value;
@@ -41,8 +39,7 @@ function newRequest() {
 
 
 function handleResponse(bookListObj) {
-	responseList = bookListObj;
-	var bookList = responseList.items;
+	var bookList = bookListObj.items;
 	var displayedIndex = 0;
 
 	// where to put the data on the Web page
@@ -79,3 +76,6 @@ function handleResponse(bookListObj) {
 	//	bookDisplay.append(titlePgh);
 	//}
 }
+
+var pop = document.getElementById("popup");
+pop.remove();

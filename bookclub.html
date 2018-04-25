@@ -5,7 +5,7 @@
     <title>Make a Book List</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" type="text/css" href="reset.css">
+    <link rel="stylesheet" type="text/css" href="normalize.css">
     <link rel="stylesheet" type="text/css" href="bookclub.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
 </head>
@@ -13,29 +13,75 @@
 <body>
 
     <header>
-        <h1>Book Club</h1>
-        Search for a book:
-        <br>
-        <input id="title" placeholder="title">
-        <input id="author" placeholder="author">
-        <input id="isbn" placeholder="XXXXXXXXXX or XXX-XXXXXXXXXX">
+        <h1>BOOK CLUB</h1>
+        <div>
+            <label for="title">Title</label>
+            <input id="title" placeholder="ex. William Shakespeare">
+        </div>
+        <div>
+            <label for="author">Author</label>
+            <input id="author" placeholder="ex. Romeo and Juliet">
+        </div>
+        <div>
+            <label for="isbn">ISBN</label>
+            <input id="isbn" placeholder="ex. 000-0-00-000000-0">
+        </div>
 
         <button onclick="newRequest()">submit</button>
 
     </header>
 
-    <main class="tiles">
+    <main id="tiles">
         <section>
-            <img src="http://via.placeholder.com/350x150" alt="placeholder"/>
-            <h2>Book Title</h2>
-            <h3>Author Name</h3>
-            <p>
-                Placeholder 30ish words here...;
-            </p>
+            <img src="http://via.placeholder.com/150x250" alt="placeholder"/>
+            <div>
+                <h2>Book Title</h2>
+                <h3>Author Name</h3>
+                <p>
+                    Placeholder 30ish words here...;
+                </p>
+            </div>
         </section>
+        <section>
+            <img src="http://via.placeholder.com/150x250" alt="placeholder"/>
+            <div>
+                <h2>Book Title</h2>
+                <h3>Author Name</h3>
+                <p>
+                    Placeholder 30ish words here...;
+                </p>
+            </div>
+        </section>
+        <section>
+            <img src="http://via.placeholder.com/150x250" alt="placeholder"/>
+            <div>
+                <h2>Book Title</h2>
+                <h3>Author Name</h3>
+                <p>
+                    Placeholder 30ish words here...;
+                </p>
+            </div>
+        </section>
+
     </main>
 
-    <div id="popup" class="hidden">
+    <div id="popup">
+        <button id="popupClose">ⓧ</button>
+        <div>
+            <button id="popupLeft">&larr;</button>
+            <section>
+                <img src="http://via.placeholder.com/150x250" alt="placholder" />
+                <div>
+                    <h2>Book Title</h2>
+                    <h3>Author Name</h3>
+                    <p>
+                        The Three-Body Problem is the first choice for English spreaking readers to experience the . . . 
+                    </p>
+                </div>
+            </section>
+            <button id="popupRight">&rarr;</button>
+        </div>
+        <button id="keep">Keep</button>
     </div>
 
 
