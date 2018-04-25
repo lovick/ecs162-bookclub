@@ -56,7 +56,82 @@ function handleResponse(bookListObj) {
 	}
 
 	function generatePopup(index) {
+		// where to put the data on the Web page
+		var popup = document.createElement("div");
+		popup.id = "popup";
 
+		var closeButton = createEle("button", "popupClose", "ⓧ");
+		popup.appendChild(closeButton);
+
+		var middleDiv = document.createElement("div");
+
+		var leftButton = createEle("button", "popupLeft", "⬅");
+		middleDiv.appendChild(leftButton);
+		if (index == 0) {
+			leftButton.style.visibility = "hidden";
+		}
+
+		var volInfo = bookList[index].volumeInfo;
+
+		var sec = document.createElement("section");
+		var img = document.createElement("img");
+		if (volInfo.hasOwnProperty("imageLinks")) {
+			if (volInfo.imageLinks.hasOwnProperty("thumbnail")) {
+				img.src = volInfo.imageLinks.thumbnail;
+			} else {
+				img.src = volInfo.imageLinks[0];
+			}
+		} else {
+			img.src = "https://dummyimage.com/150x250/EDEDED/000&text=No+Image+Found";
+		}
+		img.alt = volInfo.title;
+
+		var innerDiv = document.createElement("div");
+		var h2 = createEle("h2", "", volInfo.title);
+		innerDiv.appendChild(h2);
+		var authString = "";
+		for (var i = 0; i < volInfo.authors.length; i++) {
+			authString += volInfo.authors[i];
+			if (i+1 < volInfo.authors.length) {
+				authString += ", ";
+			}
+		}
+		var h3 = createEle("h3", "", authString);
+		innerDiv.appendChild(h3);
+		var p = createEle("p", "", "dfgjoisdjgf");
+		innerDiv.appendChild(p);
+
+		sec.appendChild(img);
+		sec.appendChild(innerDiv);
+
+		middleDiv.appendChild(sec);
+
+		var rightButton = createEle("button", "popupRight", "⮕");
+		if (index+1 >= bookList.length) {
+			rightButton.style.visibility = "hidden";
+		}
+		middleDiv.appendChild(rightButton);
+
+		popup.appendChild(middleDiv);
+
+		var keep = createEle("button", "keep", "Keep");
+		popup.appendChild(keep);
+
+		closeButton.onclick = function () {
+			popup.remove();
+		}
+
+		leftButton.onclick = function () {
+			popup.remove();
+			generatePopup(index-1);
+		}
+
+		rightButton.onclick = function () {
+			popup.remove();
+			generatePopup(index+1);
+		}
+
+		document.body.appendChild(popup);
 	}
 
 	if (bookListObj.totalItems == 0) {
@@ -65,67 +140,7 @@ function handleResponse(bookListObj) {
 	}
 
 	var bookList = bookListObj.items;
-	var displayedIndex = 0;
 
-	// where to put the data on the Web page
-	var popup = document.createElement("div");
-	popup.id = "popup";
+	generatePopup(0);
 
-	var closeButton = createEle("button", "popupClose", "ⓧ");
-	popup.appendChild(closeButton);
-
-	var middleDiv = document.createElement("div");
-
-	var leftButton = createEle("button", "popupLeft", "&larr;");
-	middleDiv.appendChild(leftButton);
-	if (displayedIndex == 0) {
-		leftButton.style.visibility = "hidden";
-	}
-
-	var volInfo = bookList[displayedIndex].volumeInfo;
-
-	var sec = document.createElement("section");
-	var img = document.createElement("img");
-	img.src = volInfo.imageLinks.thumbnail;
-	img.alt = volInfo.title;
-
-	var innerDiv = document.createElement("div");
-	var h2 = createEle("h2", "", volInfo.title);
-	innerDiv.appendChild(h2);
-	var authString = "";
-	for (var i = 0; i < volInfo.authors.length; i++) {
-		authString += volInfo.authors[i];
-		if (i+1 < volInfo.authors.length) {
-			authString += ", ";
-		}
-	}
-	var h3 = createEle("h3", "", authString);
-	innerDiv.appendChild(h3);
-	var p = createEle("p", "", "dfgjoisdjgf");
-	innerDiv.appendChild(p);
-
-	sec.appendChild(img);
-	sec.appendChild(innerDiv);
-
-	middleDiv.appendChild(sec);
-
-	var rightButton = createEle("button", "popupRight", "&rarr;");
-	middleDiv.appendChild(rightButton);
-
-	popup.appendChild(middleDiv);
-
-	var keep = createEle("button", "keep", "Keep");
-	popup.appendChild(keep);
-
-	/* write each title as a new paragraph */
-	//for (i = 0; i < bookList.length; i++) {
-	//	var book = bookList[i];
-	//	var title = book.volumeInfo.title;
-	//	var titlePgh = document.createElement("p");
-	//	/* ALWAYS AVOID using the innerHTML property */
-	//	titlePgh.textContent = title;
-	//	bookDisplay.append(titlePgh);
-	//}
-
-	document.getElementById("tiles").appendChild(popup);
 }
