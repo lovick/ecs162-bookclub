@@ -62,8 +62,8 @@ function handleResponse(bookListObj) {
 		var splitDesc = desc.split(" ");
 		var outStr = "";
 		var len = splitDesc.length;
-		if (len > 30) {
-			len = 30;
+		if (len > 25) {
+			len = 25;
 		}
 		for (var i = 0; i < len; i++) {
 			outStr += splitDesc[i];
