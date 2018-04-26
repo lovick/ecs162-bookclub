@@ -206,12 +206,61 @@ function handleResponse(bookListObj) {
 
 		var noresult = createEle("div", "noresult", "");
 
-		var p = document.createElement("p");
-		var str = "The book <strong>b</strong>";
-		var pT = document.createTextNode(str);
-		p.appendChild(pT);
+		var title = document.getElementById("title").value;
+		var author = document.getElementById("author").value;
+		var isbn = document.getElementById("isbn").value;
 
-		document.body.appendChild(p);
+		var p = document.createElement("p");
+		var t = document.createTextNode("The ");
+		p.appendChild(t);
+
+		if (title != "") {
+			var b = createEle("strong", "", title);
+			p.appendChild(b);
+		} else {
+			var b = createEle("strong", "", "Title")
+			p.appendChild(b);
+		}
+
+		t = document.createTextNode(" by ");
+		p.appendChild(t);
+
+		if (author != "") {
+			var b = createEle("strong", "", author);
+			p.appendChild(b);
+		} else {
+			var b = createEle("strong", "", "Author");
+			p.appendChild(b);
+		}
+	
+		t = document.createTextNode(", ");
+		p.appendChild(t);
+
+		if (isbn != "") {
+			var b = createEle("strong", "", isbn);
+			p.appendChild(b);
+		} else {
+			var b = createEle("strong", "", "ISBN");
+			p.appendChild(b);
+		}
+
+		t = document.createTextNode(" could not be found.");
+		p.appendChild(t);
+
+		var p2 = createEle("p", "", "Try another search.");
+
+		var but = createEle("button", "ok", "OK");
+		noresult.appendChild(p);
+		noresult.appendChild(p2);
+		noresult.appendChild(but);
+
+		popup.appendChild(noresult);
+
+		document.body.appendChild(popup);
+
+		but.onclick = function () {
+			popup.remove();
+		}
 
 		return;
 	}
