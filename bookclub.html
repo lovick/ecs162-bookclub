@@ -12,29 +12,35 @@
 
 <body>
 
-    <header>
+    <header id="nav">
         <h1>BOOK CLUB</h1>
         <div>
-            <label for="title">Title</label>
-            <input id="title" placeholder="ex. William Shakespeare">
-        </div>
-        <div>
-            <label for="author">Author</label>
-            <input id="author" placeholder="ex. Romeo and Juliet">
-        </div>
-        <div>
-            <label for="isbn">ISBN</label>
-            <input id="isbn" placeholder="ex. 000-0-00-000000-0">
+            <h4>Search for a book by...</h4>
+            <div>
+                <label for="title">Title</label>
+                <input id="title" placeholder="ex. Romeo and Juliet">
+            </div>
+            <div>
+                <label for="author">Author</label>
+                <input id="author" placeholder="ex. William Shakespeare">
+            </div>
+            <div>
+                <label for="isbn">ISBN</label>
+                <input id="isbn" placeholder="ex. 000-0-00-000000-0">
+            </div>
         </div>
 
         <button onclick="newRequest()">submit</button>
 
     </header>
 
+    <!--
     <main id="tiles">
+        
         <section>
             <img src="http://via.placeholder.com/150x250" alt="placeholder"/>
             <div>
+                <button>ⓧ</button>
                 <h2>Book Title</h2>
                 <h3>Author Name</h3>
                 <p>
@@ -45,6 +51,7 @@
         <section>
             <img src="http://via.placeholder.com/150x250" alt="placeholder"/>
             <div>
+                <button>ⓧ</button>
                 <h2>Book Title</h2>
                 <h3>Author Name</h3>
                 <p>
@@ -55,6 +62,7 @@
         <section>
             <img src="http://via.placeholder.com/150x250" alt="placeholder"/>
             <div>
+                <button>ⓧ</button>
                 <h2>Book Title</h2>
                 <h3>Author Name</h3>
                 <p>
@@ -62,8 +70,10 @@
                 </p>
             </div>
         </section>
-
+        
     </main>
+    -->
+
     <!--
     <div id="popup">
         <button id="popupClose">ⓧ</button>
@@ -84,6 +94,18 @@
         <button id="keep">Keep</button>
     </div>
     -->
+
+    <div id="popup">
+        <div id="noresult">
+            <p>
+                The book <b>Title</b> by <b>Author</b> or <b>ISBN number</b> 000-0-00-000000-0 could not be found.
+            </p>
+            <p>
+                Try another search.
+            </p>
+            <button id="ok">OK</button>
+        </div>
+    </div>
 
     <!-- The Javascript for this page -->
     <script src="bookclub.js">
